@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 25px auto;
+            padding: 0;
+        }
+        #btn,#btn2{
+            margin: 0 auto;
+            text-align: center;
+            width: 400px;
+            border:1px solid greenyellow;
+            position: absolute;
+        }
+        #divStyle{
+            width: 412px;
+            border: 1px solid red;
+            padding-top: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+    </style>
+    <script>
+        var index = 0;
+        window.onload = function(){
+            var speed = 40;
+            var MyMar = setInterval(scrollInput,speed);
+            var div = document.getElementById("divStyle");
+            div.onmouseover=function(){clearInterval(MyMar)};
+            div.onmouseout=function(){MyMar=setInterval(scrollInput,speed)};
+        }
+        function scrollInput(){
+            var table = document.getElementById("btn2");
+            var btn = document.getElementById("btn");
+            var div = document.getElementById("divStyle");
+            var widthBtn = btn.offsetHeight;
+            var wdithDiv = div.offsetHeight;
+            if(index===0){
+                table.style.height = widthBtn+"px";
+                //table.offsetHeight = widthBtn*2+"px";
+                table.innerHTML = btn.innerHTML;
+            }
+            var top = btn.style.top;
+            top = parseInt(top);
+            var top2 = table.style.top;
+            top2 = parseInt(top2);
+            var height = table.offsetHeight;
+            if((top+top2+widthBtn+height)<=wdithDiv){
+                if(top+widthBtn<=0){
+                    top = (top2+height);
+                    btn.style.top = top+"px";
+                }
+                if(top2+height<=0){
+                    top2 = (top+widthBtn);
+                    table.style.top = top2+"px";
+                }
+            }
+            table.style.top = --top2+"px";
+            btn.style.top = --top+"px";
+            index++;
+        }
+        /*window.onload = function(){
+        }*/
+        function getStyle(obj, attr){
+            return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj, false)[attr];
+        }
+    </script>
+</head>
+<body>
+<!--<input type="button" value="滚动" onclick="scrollInput();">-->
+<div id="divStyle" style="height: 412px;">
+<table id="btn"  cellpadding="0" style="top:1px;height:450px; " cellspacing="0"  border="1px solid red">
+    <tr>
+        <td>333</td>
+        <td>444</td>
+        <td>555</td>
+    </tr>
+    <tr>
+        <td>666</td>
+        <td>444</td>
+        <td>555</td>
+    </tr>
+    <tr>
+        <td>666</td>
+        <td>66</td>
+        <td>44</td>
+    </tr>
+</table>
+    <table id="btn2" cellpadding="0" style="top:450px; " cellspacing="0"  border="1px solid red"></table>
+</div>
+</body>
+</html>
