@@ -20,6 +20,7 @@ public class FirstApplication {
         return "lms:haha!";
     }
     /**
+     * 测试一下
      * @Author lms
      * @Description @SpringBootApplication是Spring Boot 项目的核心注解
      * 主要目的是开启自动配置
